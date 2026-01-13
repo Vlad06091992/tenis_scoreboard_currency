@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+archivesBaseName = 'tennis_scoreboard'
+version = '1.0.0'
+
+war {
+    archiveFileName = 'tennis_scoreboard.war'
+    // или для более полного контроля:
+    // archiveBaseName = 'tennis_scoreboard'
+    // archiveVersion = ''  // убрать версию если нужно
+}
+
+group = 'io.microservices_java'
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
+    implementation("jakarta.servlet:jakarta.servlet-api:6.0.0")
+    // Source: https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api
+    implementation("jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.0.0")
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation('org.postgresql:postgresql:42.7.7')
+    // Source: https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
+    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0")
+    implementation ("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
+    // Source: https://mvnrepository.com/artifact/jakarta.el/jakarta.el-api
+    implementation("jakarta.el:jakarta.el-api:5.0.1")
+    // Source: https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
+    implementation("org.hibernate.orm:hibernate-core:6.5.2.Final")
+    // Source: https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    // Source: https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation("org.postgresql:postgresql:42.7.7")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+war {
+    archiveFileName = 'tennis_scoreboard.war'
+}
