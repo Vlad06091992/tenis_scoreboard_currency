@@ -21,5 +21,6 @@
         <property name="current_session_context_class">thread</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="io.microservices_java.entity.Player"/>
+        <mapping class="io.microservices_java.entity.Match"/>
     </session-factory>
 </hibernate-configuration>

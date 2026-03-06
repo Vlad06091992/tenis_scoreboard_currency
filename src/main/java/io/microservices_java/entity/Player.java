@@ -14,6 +14,8 @@ public class Player {
     @Column(name = "name")
     private String name;
 
+    public Player() {}
+
     public int getId() {
         return id;
     }

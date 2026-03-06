@@ -1,0 +1,50 @@
+body{
+    background: #131314;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.grid-container {
+    background: #1a1f2e; /* Темный стальной */
+    padding: 20px;
+    display: grid;
+    /* 3 строки 4 колонки*/
+    grid-template: repeat(3, 1fr) / repeat(4, 200px);
+}
+
+.cell {
+    border: 3px solid #3a506b;
+    margin: 5px;
+    background: linear-gradient(135deg, #243b55 0%, #141e30 100%);
+    color: #e0eaff; /* Светлый голубоватый */
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.cell:hover, .cell.active {
+    background: linear-gradient(135deg, #3a506b 0%, #1c2b3a 100%);
+    border-color: #5bc0be; /* Акцентный бирюзовый */
+    box-shadow: 0 0 15px rgba(91, 192, 190, 0.3);
+    transform: translateY(-2px);
+}
+
+.buttons_container{
+    display: flex;
+}
+
+
+/* Ячейки счета текущего гейма */
+/*.cell.score-current {*/
+/*    background: linear-gradient(135deg, #5bc0be 0%, #3a8b89 100%);*/
+/*    color: #0a0e17;*/
+/*    border-color: #5bc0be;*/
+/*}*/

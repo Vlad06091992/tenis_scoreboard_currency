@@ -27,7 +27,9 @@ public class CurrenciesServlet extends HttpServlet {
 //        RequestDispatcher requestDispatcher = request.getRequestDispatcher("views/jsp/hello.jsp");
         request.setAttribute("count", service.getCount());
         request.setAttribute("disabled", service.getIsDisabled());
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/hello.jsp");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/hello.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/new-match.jsp");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/hello.jsp");
 //        request.getRequestDispatcher("/WEB-INF/views/jsp/hello.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -44,14 +46,15 @@ public class CurrenciesServlet extends HttpServlet {
             service.dec();
         }
 
-        List<Player> players = playerDao.getAllPlayers();
+        List<Player> playerEntities = playerDao.getAllPlayers();
 
         // Передаем счетчик в JSP
         request.setAttribute("count", service.getCount());
         request.setAttribute("disabled", service.getIsDisabled());
 
         // Перенаправляем на JSP страницу
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/hello.jsp");
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/hello.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/new-match.jsp");
 //        dispatcher.forward(request, response);
         requestDispatcher.forward(request, response);
     }
