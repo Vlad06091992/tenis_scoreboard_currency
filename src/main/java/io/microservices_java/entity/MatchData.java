@@ -1,13 +1,11 @@
 package io.microservices_java.entity;
 
-import io.microservices_java.service.MatchOnGoingProcessor;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
-//хранилище игр в матче с методами управления их жизненным циклом
+//хранилище данных матча с тупыми методами для обновления состояния
 // берет матч и преобразует данные для вывода в jsp
 // у матча должно быть состояние, он должен сам, или с помощью хелпера менять свое состояние
 // в течении игры
@@ -26,7 +24,7 @@ public class MatchData {
         this.player1 = playerOneName;
         this.player2 = playerTwoName;
         games.add(new Game(playerOneName, playerTwoName, 0));
-//        MatchOnGoingProcessor matchOnGoingProcessor = MatchOnGoingProcessor.getInstance();
+
     }
 
 
@@ -39,20 +37,6 @@ public class MatchData {
     public void addNewGame() {
         int index = games.size();
         games.add(new Game(player1, player2, index));
-    }
-
-    public void updateScore(String player) {
-        Game game = getCurrentGame();
-        //получили игру, и теперь надо докинуть и очки, и правильно их отобразить
-        // на этом этапе должна выполнять логика увеличения очков
-        // логика завершения игры, сета, матча
-
-        if (player.equals("playerOne")) {
-            game.setPlayer1Points(game.getPlayer1Points() + 1);
-        }
-        if (player.equals("playerTwo")) {
-            game.setPlayer2Points(game.getPlayer2Points() + 1);
-        }
     }
 
     public void updateOnePlayerGameScore() {
@@ -72,17 +56,22 @@ public class MatchData {
     }
 
     public MatchViewData getMatchViewData() {
-        Integer player1Points = getCurrentGame().getPlayer1Points();
-        Integer player2Points = getCurrentGame().getPlayer2Points();
+
+        Game currentGame = getCurrentGame();
+
+        Integer player1Points = currentGame.getPlayer1Points();
+        Integer player2Points = currentGame.getPlayer2Points();
 
 
         return new MatchViewData
                 .Builder()
                 .matchId(UUID.fromString(matchId.toString()))
-                .playerOneSet(5)
+                .playerOneName(currentGame.player1)
+                .playerTwoName(currentGame.player2)
+                .playerOneSet(0)
                 .playerOneGame(getPlayerOneGameScore())
                 .playerOnePoint(player1Points)
-                .playerSecondSet(9)
+                .playerSecondSet(0)
                 .playerSecondGame(getPlayerTwoGameScore())
                 .playerSecondPoint(player2Points)
                 .build();

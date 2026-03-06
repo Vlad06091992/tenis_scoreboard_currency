@@ -1,6 +1,6 @@
 package io.microservices_java.context;
 import io.microservices_java.dao.PlayerDao;
-import io.microservices_java.service.MatchService;
+import io.microservices_java.service.MatchOnGoingProcessor;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
@@ -24,12 +24,12 @@ public class MyListenerGfg implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         try {
             PlayerDao pdao = new PlayerDao();
-            MatchService matchService = new MatchService();
+            MatchOnGoingProcessor matchOnGoingProcessor = new MatchOnGoingProcessor();
 
             ctx = sce.getServletContext();
 //            ctx.setAttribute("pcount", count);
             ctx.setAttribute("pdao", pdao);
-            ctx.setAttribute("matchService", matchService);
+            ctx.setAttribute("matchService", matchOnGoingProcessor);
         }
 
         // Catch block to handle exceptions

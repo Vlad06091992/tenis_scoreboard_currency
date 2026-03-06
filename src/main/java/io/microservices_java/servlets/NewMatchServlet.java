@@ -1,6 +1,6 @@
 package io.microservices_java.servlets;
 
-import io.microservices_java.service.MatchService;
+import io.microservices_java.service.MatchOnGoingProcessor;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,11 +15,11 @@ import java.util.UUID;
 @WebServlet("/new-match")
 public class NewMatchServlet extends HttpServlet {
 
-    MatchService matchService;
+    MatchOnGoingProcessor matchOnGoingProcessor;
 
     @Override
     public void init() throws ServletException {
-         matchService = (MatchService) getServletContext().getAttribute("matchService");
+         matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchService");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -34,8 +34,7 @@ public class NewMatchServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
 
-       UUID newGameId = UUID.randomUUID();
-       matchService.startMatch(newGameId, player1, player2);
+
 
         if(player1.equals("ваня")){
             response.setStatus(400);
@@ -44,6 +43,9 @@ public class NewMatchServlet extends HttpServlet {
             response.sendRedirect("/tennis_scoreboard/new-match" );
             return;
         }
+
+        UUID newGameId = UUID.randomUUID();
+        matchOnGoingProcessor.startMatch(newGameId, player1, player2);
 
         response.sendRedirect( request.getContextPath() + "/match-score" + '/' + newGameId);
     }

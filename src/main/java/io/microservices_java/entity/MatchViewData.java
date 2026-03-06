@@ -8,6 +8,10 @@ import java.util.UUID;
 //в том числе отобржать эти 15/30/40 что то такое
 public class MatchViewData {
     UUID matchId;
+
+    public String playerOneName;
+    public String playerTwoName;
+
     public Integer playerOnePoint;
     public Integer playerOneGame;
     public Integer playerOneSet;
@@ -17,7 +21,8 @@ public class MatchViewData {
     public Integer playerSecondSet;
 
 
-    public MatchViewData(UUID matchId, Integer playerOnePoint, Integer playerOneGame, Integer playerOneSet, Integer playerSecondPoint, Integer playerSecondGame, Integer playerSecondSet) {
+
+    public MatchViewData(UUID matchId, Integer playerOnePoint, Integer playerOneGame, Integer playerOneSet, Integer playerSecondPoint, Integer playerSecondGame, Integer playerSecondSet, String playerOneName, String playerTwoName) {
         this.matchId = matchId;
         this.playerOnePoint = playerOnePoint;
         this.playerOneGame = playerOneGame;
@@ -25,6 +30,8 @@ public class MatchViewData {
         this.playerSecondPoint = playerSecondPoint;
         this.playerSecondGame = playerSecondGame;
         this.playerSecondSet = playerSecondSet;
+        this.playerOneName = playerOneName;
+        this.playerTwoName = playerTwoName;
     }
 
     public String getPlayerPointView(String player) {
@@ -75,6 +82,14 @@ public class MatchViewData {
         return getPlayerPointView("playerSecond");
     }
 
+    public String getPlayerOneName() {
+        return playerOneName;
+    }
+
+    public String getPlayerTwoName() {
+        return playerTwoName;
+    }
+
     public String getPlayerOnePoint() {
         return getPlayerPointView("playerOne");
     }
@@ -92,6 +107,10 @@ public class MatchViewData {
 
     public static class Builder {
         UUID matchId;
+
+        String playerOneName;
+        String playerTwoName;
+
         Integer playerOnePoint;
         Integer playerOneGame;
         Integer playerOneSet;
@@ -100,14 +119,23 @@ public class MatchViewData {
         Integer playerSecondGame;
         Integer playerSecondSet;
 
+        public Builder playerOneName (String playerOneName) {
+            this.playerOneName = playerOneName;
+            return this;
+        }
 
-        public Builder matchId(UUID matchId) {
-            this.matchId = matchId;
+        public Builder playerTwoName (String playerTwoName) {
+            this.playerTwoName = playerTwoName;
             return this;
         }
 
         public Builder playerOnePoint(Integer playerOnePoint) {
             this.playerOnePoint = playerOnePoint;
+            return this;
+        }
+
+        public Builder matchId(UUID matchId) {
+            this.matchId = matchId;
             return this;
         }
 
@@ -144,7 +172,9 @@ public class MatchViewData {
                     playerOneSet,
                     playerSecondPoint,
                     playerSecondGame,
-                    playerSecondSet
+                    playerSecondSet,
+                    playerOneName,
+                    playerTwoName
             );
         }
     }

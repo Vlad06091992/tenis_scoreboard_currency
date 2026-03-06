@@ -28,12 +28,12 @@
     <div class="cell cell_header">Games</div>
     <div class="cell cell_header">Points</div>
 
-    <div class="cell">Player1</div>
+    <div class="cell">${matchViewData.playerOneName}</div>
     <div class="cell">${matchViewData.playerOneSet}</div>
     <div class="cell">${matchViewData.playerOneGame}</div>
     <div class="cell">${matchViewData.playerOnePoint}</div>
 
-    <div class="cell">Player2</div>
+    <div class="cell">${matchViewData.playerTwoName}</div>
     <div class="cell">${matchViewData.playerSecondSet}</div>
     <div class="cell">${matchViewData.playerSecondGame}</div>
     <div class="cell">${matchViewData.playerSecondPoint}</div>
