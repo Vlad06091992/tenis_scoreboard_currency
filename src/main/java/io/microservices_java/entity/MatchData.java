@@ -1,80 +1,137 @@
 package io.microservices_java.entity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.UUID;
 
-//хранилище данных матча с тупыми методами для обновления состояния
-// берет матч и преобразует данные для вывода в jsp
-// у матча должно быть состояние, он должен сам, или с помощью хелпера менять свое состояние
-// в течении игры
 public class MatchData {
+    private boolean isFinished = false;
 
-    String player1 = "";
-    String player2 = "";
-    int playerOneGameScore = 0;
-    int playerTwoGameScore = 0;
+    public String getWinner() {
+        return winner;
+    }
 
-    ArrayList<Game> games = new ArrayList<>();
-    UUID matchId;
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    private String winner;
+    private String player1 = "";
+    private String player2 = "";
+
+    private int playerOneSetScore = 0;
+    private int playerTwoSetScore = 0;
+
+    private ArrayList<MatchGame> matchGames = new ArrayList<>();
+    private ArrayList<MatchSet> matchSets = new ArrayList<>();
+    private UUID matchId;
+
+    public String getPlayer1() {
+        return player1;
+    }
+
+    public String getPlayer2() {
+        return player2;
+    }
 
     public MatchData(UUID matchId, String playerOneName, String playerTwoName) {
         this.matchId = matchId;
         this.player1 = playerOneName;
         this.player2 = playerTwoName;
-        games.add(new Game(playerOneName, playerTwoName, 0));
+        matchGames.add(new MatchGame(playerOneName, playerTwoName, 0, String.valueOf(0)));
+        matchSets.add(new MatchSet(playerOneName, playerTwoName, 0, String.valueOf(0)));
 
     }
 
 
-    public Game getCurrentGame() {
-        Collections.sort(games, Comparator.comparing(Game::getGameIndex));
-        return games.get(games.size() - 1);
+    public MatchGame getCurrentGame() {
+        matchGames.sort(Comparator.comparing(MatchGame::getIndex));
+        return matchGames.get(matchGames.size() - 1);
+    }
+
+    public MatchSet getCurrentSet() {
+        matchSets.sort(Comparator.comparing(MatchSet::getIndex));
+        return matchSets.get(matchSets.size() - 1);
     }
 
 
     public void addNewGame() {
-        int index = games.size();
-        games.add(new Game(player1, player2, index));
+        int index = matchGames.size();
+        matchGames.add(new MatchGame(player1, player2, index, String.valueOf(index)));
     }
 
-    public void updateOnePlayerGameScore() {
-        playerOneGameScore = playerOneGameScore + 1;
+    public void addTieBreak() {
+        int index = matchGames.size();
+        matchGames.add(new MatchTieBreak(player1, player2, index, String.valueOf(index)));
     }
 
-    public void updateTwoPlayerGameScore() {
-        playerTwoGameScore = playerTwoGameScore + 1;
+    public void addNewSet() {
+        int index = matchSets.size();
+        matchSets.add(new MatchSet(player1, player2, index, String.valueOf(index)));
+    }
+
+    public void updateOnePlayerSetScore() {
+        playerOneSetScore = playerOneSetScore + 1;
+    }
+
+    public void updateTwoPlayerSetScore() {
+        playerTwoSetScore = playerTwoSetScore + 1;
     }
 
     public int getPlayerTwoGameScore() {
-        return playerTwoGameScore;
+        MatchSet currentMatchSet = getCurrentSet();
+        Integer player2Points = currentMatchSet.getPlayer2Points();
+        return player2Points;
     }
 
     public int getPlayerOneGameScore() {
-        return playerOneGameScore;
+        MatchSet currentMatchSet = getCurrentSet();
+        Integer player1Points = currentMatchSet.getPlayer1Points();
+        return player1Points;
+    }
+
+    public int getPlayerTwoSetScore() {
+        return playerTwoSetScore;
+    }
+
+    public int getPlayerOneSetScore() {
+        return playerOneSetScore;
     }
 
     public MatchViewData getMatchViewData() {
 
-        Game currentGame = getCurrentGame();
+        MatchGame currentMatchGame = getCurrentGame();
 
-        Integer player1Points = currentGame.getPlayer1Points();
-        Integer player2Points = currentGame.getPlayer2Points();
-
+        Integer player1Points = currentMatchGame.getPlayer1Points();
+        Integer player2Points = currentMatchGame.getPlayer2Points();
+        Boolean isTaiBreak = currentMatchGame instanceof MatchTieBreak;
 
         return new MatchViewData
                 .Builder()
                 .matchId(UUID.fromString(matchId.toString()))
-                .playerOneName(currentGame.player1)
-                .playerTwoName(currentGame.player2)
-                .playerOneSet(0)
+                .firstPlayerName(currentMatchGame.player1)
+                .secondPlayerName(currentMatchGame.player2)
+                .firstPlayerSetCount(getPlayerOneSetScore())
+                .secondPlayerSetCount(getPlayerTwoSetScore())
+
+
+
                 .playerOneGame(getPlayerOneGameScore())
                 .playerOnePoint(player1Points)
-                .playerSecondSet(0)
                 .playerSecondGame(getPlayerTwoGameScore())
                 .playerSecondPoint(player2Points)
+                .setIsTaiBreak(isTaiBreak)
+                .setIsFinished(getIsFinished())
+                .setWinner(getWinner())
                 .build();
     }
 
+    public boolean getIsFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(String winner) {
+        isFinished = true;
+        this.winner = winner;
+    }
 }

@@ -33,8 +33,6 @@ public class MatchScoreServlet extends HttpServlet {
         MatchViewData matchViewData = matchData.getMatchViewData();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/match-score.jsp");
 
-        System.out.println(matchViewData.playerOneGame);
-
         request.setAttribute("matchViewData", matchViewData);
         requestDispatcher.forward(request, response);
     }

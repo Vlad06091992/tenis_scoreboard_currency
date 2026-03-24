@@ -1,20 +1,25 @@
 package io.microservices_java.entity;
 
-import java.util.UUID;
+public abstract class MatchComponent {
+    String name;
+    Boolean isFinished = false;
 
-public class Game {
-    Boolean isFinished;
+    public String getWinner() {
+        return winner;
+    }
+
     String winner = null;
     String player1;
     String player2;
     Integer player1Points = 0;
     Integer player2Points = 0;
-    Integer gameIndex;
+    Integer index;
 
-    public Game(String player1, String player2, int gameIndex ) {
+    public MatchComponent(String player1, String player2, int index,String name ) {
         this.player1 = player1;
         this.player2 = player2;
-        this.gameIndex = gameIndex;
+        this.index = index;
+        this.name = name;
     }
 
     public Integer getPlayer1Points() {
@@ -33,12 +38,16 @@ public class Game {
         this.player2Points = player2Points;
     }
 
-    public void finished(){
+    public void finished(String player){
         isFinished = true;
-//        winner
+        winner = player;
     }
 
-    public Integer getGameIndex() {
-        return gameIndex;
+    public Integer getIndex() {
+        return index;
+    }
+
+    public Boolean getFinished() {
+        return isFinished;
     }
 }

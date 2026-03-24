@@ -1,28 +1,27 @@
 package io.microservices_java.entity;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
 
-//должен подготавливать данные для вывода на экран
-//в том числе отобржать эти 15/30/40 что то такое
 public class MatchViewData {
-    UUID matchId;
+    private UUID matchId;
+    private Boolean isTaiBreak = false;
+    private Boolean isFinished = false;
+    private String winner;
+    private String playerOneName;
+    private String playerTwoName;
+    private Integer playerOnePoint;
+    private Integer playerOneGame;
+    private Integer playerOneSet;
+    private Integer playerSecondPoint;
+    private Integer playerSecondGame;
+    private Integer playerSecondSet;
 
-    public String playerOneName;
-    public String playerTwoName;
+    public MatchViewData(UUID matchId) {
+        this.matchId = matchId;
+    }
 
-    public Integer playerOnePoint;
-    public Integer playerOneGame;
-    public Integer playerOneSet;
-
-    public Integer playerSecondPoint;
-    public Integer playerSecondGame;
-    public Integer playerSecondSet;
-
-
-
-    public MatchViewData(UUID matchId, Integer playerOnePoint, Integer playerOneGame, Integer playerOneSet, Integer playerSecondPoint, Integer playerSecondGame, Integer playerSecondSet, String playerOneName, String playerTwoName) {
+    public MatchViewData(UUID matchId, Integer playerOnePoint, Integer playerOneGame, Integer playerOneSet, Integer playerSecondPoint, Integer playerSecondGame, Integer playerSecondSet, String playerOneName, String playerTwoName, Boolean isTaiBreak, String winner,Boolean isFinished) {
         this.matchId = matchId;
         this.playerOnePoint = playerOnePoint;
         this.playerOneGame = playerOneGame;
@@ -32,14 +31,21 @@ public class MatchViewData {
         this.playerSecondSet = playerSecondSet;
         this.playerOneName = playerOneName;
         this.playerTwoName = playerTwoName;
+        this.isTaiBreak = isTaiBreak;
+        this.winner = winner;
+        this.isFinished = isFinished;
     }
 
     public String getPlayerPointView(String player) {
-
         String result = "";
 
         Integer playerPoint = player.equals("playerOne") ? playerOnePoint : playerSecondPoint;
         Integer otherPlayerPoint = Objects.equals(playerPoint, playerOnePoint) ? playerSecondPoint : playerOnePoint;
+
+        if (isTaiBreak) {
+            return playerPoint.toString();
+        }
+
         switch (playerPoint) {
             case 0:
                 result = "0";
@@ -54,17 +60,14 @@ public class MatchViewData {
                 result = "40";
                 break;
             default:
-                if(playerPoint > otherPlayerPoint) {
+                if (playerPoint > otherPlayerPoint) {
                     result = "Лидер";
                 }
 
-                if(playerPoint.equals(otherPlayerPoint)) {
-                    result = "---";
+                if (playerPoint.equals(otherPlayerPoint)) {
+                    result = "Deuce";
                 }
-
-
         }
-
         return result;
     }
 
@@ -105,9 +108,24 @@ public class MatchViewData {
     }
 
 
+    public String getWinner() {
+        return winner;
+    }
+
+    public Boolean getTaiBreak() {
+        return isTaiBreak;
+    }
+
+    public Boolean getFinished() {
+        return isFinished;
+    }
+
+
     public static class Builder {
         UUID matchId;
-
+        String winner;
+        Boolean isTaiBreak;
+        Boolean isFinished;
         String playerOneName;
         String playerTwoName;
 
@@ -119,12 +137,12 @@ public class MatchViewData {
         Integer playerSecondGame;
         Integer playerSecondSet;
 
-        public Builder playerOneName (String playerOneName) {
+        public Builder firstPlayerName(String playerOneName) {
             this.playerOneName = playerOneName;
             return this;
         }
 
-        public Builder playerTwoName (String playerTwoName) {
+        public Builder secondPlayerName(String playerTwoName) {
             this.playerTwoName = playerTwoName;
             return this;
         }
@@ -144,7 +162,7 @@ public class MatchViewData {
             return this;
         }
 
-        public Builder playerOneSet(Integer playerOneSet) {
+        public Builder firstPlayerSetCount(Integer playerOneSet) {
             this.playerOneSet = playerOneSet;
             return this;
         }
@@ -159,8 +177,23 @@ public class MatchViewData {
             return this;
         }
 
-        public Builder playerSecondSet(Integer playerSecondSet) {
+        public Builder secondPlayerSetCount(Integer playerSecondSet) {
             this.playerSecondSet = playerSecondSet;
+            return this;
+        }
+
+        public Builder setIsTaiBreak(Boolean isTaiBreak) {
+            this.isTaiBreak = isTaiBreak;
+            return this;
+        }
+
+        public Builder setIsFinished(Boolean isFinished) {
+            this.isFinished = isFinished;
+            return this;
+        }
+
+        public Builder setWinner(String winner) {
+            this.winner = winner;
             return this;
         }
 
@@ -174,7 +207,10 @@ public class MatchViewData {
                     playerSecondGame,
                     playerSecondSet,
                     playerOneName,
-                    playerTwoName
+                    playerTwoName,
+                    isTaiBreak,
+                    winner,
+                    isFinished
             );
         }
     }
