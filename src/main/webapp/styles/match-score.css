@@ -41,6 +41,10 @@ body{
     display: flex;
 }
 
+.match-finished{
+    color: white;
+}
+
 
 /* Ячейки счета текущего гейма */
 /*.cell.score-current {*/
