@@ -8,7 +8,16 @@ public class HibernateUtil {
 
     static {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            SessionFactory sessionFactory1 = new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(Match.class)
+                    .addAnnotatedClass(Player.class)
+                    .buildSessionFactory();
+            sessionFactory = sessionFactory1;
+
+            System.out.println(sessionFactory.toString());
+            System.out.println("INIT SESSION FACTORY");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,8 +1,8 @@
-package io.microservices_java.entity;
+package io.microservices_java.dao;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "Player")
 @Table(name = "players")
 public class Player {
 
