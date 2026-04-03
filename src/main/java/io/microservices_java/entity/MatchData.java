@@ -24,15 +24,7 @@ public class MatchData {
 
     private ArrayList<MatchGame> matchGames = new ArrayList<>();
     private ArrayList<MatchSet> matchSets = new ArrayList<>();
-    private UUID matchId;
 
-    public String getPlayer1() {
-        return player1;
-    }
-
-    public String getPlayer2() {
-        return player2;
-    }
 
     public MatchData(UUID matchId, String playerOneName, String playerTwoName) {
         this.matchId = matchId;
@@ -43,6 +35,19 @@ public class MatchData {
 
     }
 
+    public UUID getMatchId() {
+        return matchId;
+    }
+
+    private UUID matchId;
+
+    public String getPlayer1() {
+        return player1;
+    }
+
+    public String getPlayer2() {
+        return player2;
+    }
 
     public MatchGame getCurrentGame() {
         matchGames.sort(Comparator.comparing(MatchGame::getIndex));
