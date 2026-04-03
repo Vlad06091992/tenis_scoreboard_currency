@@ -75,24 +75,10 @@ public class MatchOnGoingProcessor {
         Integer two = currentSet.getPlayer2Points();
 
         boolean isTaiBreak = currentGame instanceof MatchTieBreak;
-
-//        if(isTaiBreak && currentGame.getFinished()){
-//            String winner = currentGame.getWinner();
-//            matchData.getCurrentSet().finished(winner);
-//            matchData.addNewSet();
-//            matchData.addNewGame();
-//            return;
-//        }
-
-
-
-
         int max = Math.max(one, two);
         int spread = Math.abs(one - two);
 
 
-
-//        boolean b = isTaiBreak ?  (max >= 67 && spread > 1): (max >= 6 && spread > 1) ;
         if ( (isTaiBreak && currentGame.getFinished()) ||  (max >= 6 && spread > 1)) {
             String winner;
             if (max == one) {
