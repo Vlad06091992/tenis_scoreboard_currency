@@ -1,5 +1,6 @@
 package io.microservices_java.servlets;
 
+import io.microservices_java.dao.MatchDao;
 import io.microservices_java.entity.MatchData;
 import io.microservices_java.entity.MatchViewData;
 import io.microservices_java.service.MatchOnGoingProcessor;
@@ -18,10 +19,12 @@ import java.util.UUID;
 public class MatchScoreServlet extends HttpServlet {
 
     MatchOnGoingProcessor matchOnGoingProcessor;
+    MatchDao matchDao;
 
     @Override
     public void init() throws ServletException {
-        matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchService");
+        matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchOnGoingProcessor");
+        matchDao = (MatchDao) getServletContext().getAttribute("matchDao");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -57,7 +60,13 @@ public class MatchScoreServlet extends HttpServlet {
 
         UUID uuid = UUID.fromString(matchId);
         matchOnGoingProcessor.updateMatchProgress(uuid, player);
-        response.sendRedirect(request.getContextPath() + "/match-score" + '/' + matchId);
+
+        MatchData matchData = matchOnGoingProcessor.getMatchData(uuid);
+
+        if(matchData.getIsFinished()){
+            matchDao.addMatch(matchData);
+        }
+            response.sendRedirect(request.getContextPath() + "/match-score" + '/' + matchId);
     }
 
 

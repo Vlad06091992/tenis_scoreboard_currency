@@ -19,7 +19,7 @@ public class NewMatchServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-         matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchService");
+         matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchOnGoingProcessor");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
