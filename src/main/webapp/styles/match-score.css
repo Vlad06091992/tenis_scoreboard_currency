@@ -37,6 +37,8 @@ body{
 }
 
 .buttons_container{
+    padding: 20px;
+    justify-content: space-between;
     display: flex;
 }
 
@@ -51,3 +53,33 @@ body{
 /*    color: #0a0e17;*/
 /*    border-color: #5bc0be;*/
 /*}*/
+
+.buttons_block{
+    margin-top: 10px;
+}
+
+button {
+    position: relative;
+    padding: 18px 50px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0a0e17;
+    background: linear-gradient(135deg, #5bc0be 0%, #3a8b89 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+            0 8px 25px rgba(91, 192, 190, 0.3),
+            0 4px 6px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 200px;
+    border: 2px solid transparent;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

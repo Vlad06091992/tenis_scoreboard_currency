@@ -20,7 +20,7 @@
 </head>
 
 <body>
-
+<div>
 <c:if test="${matchViewData.taiBreak}">
     <div class="match-finished">
         Тай брейк!
@@ -71,30 +71,6 @@
         </div>
     </c:otherwise>
 </c:choose>
-
-
-
-
-<%--<form action="match-score" method="POST" style="display: inline;">--%>
-<%--    <div class="form_wrapper">--%>
-<%--        <div>--%>
-<%--            playerEntity 1 name : <input class="player_input" type="text" name="playerEntity1" placeholder="playerEntity1"/>--%>
-<%--        </div>--%>
-<%--        <div>--%>
-<%--            playerEntity 2 name : <input class="player_input" type="text" name="playerEntity2" placeholder="playerEntity2"/>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-<%--    <div class="btn_wrapper">--%>
-<%--        <button class="submit_button"--%>
-<%--                type="submit">--%>
-<%--            Start--%>
-<%--        </button>--%>
-<%--    </div>--%>
-
-
-<%--</form>--%>
-
-
+</div>
 </body>
 </html>
