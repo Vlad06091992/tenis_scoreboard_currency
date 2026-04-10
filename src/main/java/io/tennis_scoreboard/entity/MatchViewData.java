@@ -1,4 +1,4 @@
-package io.microservices_java.entity;
+package io.tennis_scoreboard.entity;
 
 import java.util.Objects;
 import java.util.UUID;

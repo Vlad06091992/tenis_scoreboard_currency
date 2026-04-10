@@ -1,7 +1,7 @@
-package io.microservices_java.context;
-import io.microservices_java.dao.MatchDao;
-import io.microservices_java.dao.PlayerDao;
-import io.microservices_java.service.MatchOnGoingProcessor;
+package io.tennis_scoreboard.context;
+import io.tennis_scoreboard.dao.MatchDao;
+import io.tennis_scoreboard.dao.PlayerDao;
+import io.tennis_scoreboard.service.MatchOnGoingProcessor;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;

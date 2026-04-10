@@ -1,10 +1,8 @@
-package io.microservices_java.servlets;
+package io.tennis_scoreboard.servlets;
 
-import io.microservices_java.dao.Match;
-import io.microservices_java.dao.MatchDao;
-import io.microservices_java.entity.MatchData;
-import io.microservices_java.entity.MatchViewData;
-import io.microservices_java.service.MatchOnGoingProcessor;
+import io.tennis_scoreboard.dao.Match;
+import io.tennis_scoreboard.dao.MatchDao;
+import io.tennis_scoreboard.service.MatchOnGoingProcessor;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,12 +10,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.UUID;
 
 @WebServlet("/results")
 public class ResultsServlet extends HttpServlet {

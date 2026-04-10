@@ -1,5 +1,6 @@
-package io.microservices_java.dao;
+package io.tennis_scoreboard.dao;
 
+import io.tennis_scoreboard.entity.MatchData;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -7,26 +8,29 @@ import org.hibernate.query.Query;
 import java.util.List;
 import java.util.Optional;
 
-public class PlayerDao {
+public class MatchDao {
     private final SessionFactory sessionFactory;
 
-    // Конструктор с инъекцией SessionFactory
-    public PlayerDao(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     // Или можно оставить получение через HibernateUtil
-    public PlayerDao() {
+    public MatchDao() {
         this.sessionFactory = HibernateUtil.getSessionFactory();
     }
 
-    public List<Player> getAllPlayers() {
+    public List<Match> getAllMatches(String name, String page) {
         Session session = sessionFactory.getCurrentSession();
 
         try {
+            int limit = 5;
+            int offset = Integer.parseInt(page) == 1 ? 0 : (Integer.parseInt(page) - 1) * limit;
+
             session.beginTransaction();
-            List<Player> playerEntities = session.createQuery("from Player", Player.class)
+            String query = name.isEmpty() ? "from Match" : "from Match where winner = '" + name + "'";
+            List<Match> playerEntities = session.createQuery(query, Match.class)
+                    .setFirstResult(offset)
+                    .setMaxResults(limit)
                     .getResultList();
+
+
             session.getTransaction().commit();
             return playerEntities;
         } catch (Exception e) {
@@ -57,22 +61,25 @@ public class PlayerDao {
         }
     }
 
-    public Player createPlayer(String playerName) {
+    public void addMatch(MatchData matchData) {
         Session session = sessionFactory.getCurrentSession();
 
         try {
             session.beginTransaction();
 
-            Player newPlayerEntity = new Player();
-            newPlayerEntity.setName(playerName);
+            Match match = new Match();
+            match.setId(matchData.getMatchId());
+            match.setPlayerOne(matchData.getPlayer1());
+            match.setPlayerTwo(matchData.getPlayer2());
+            match.setWinner(matchData.getWinner());
 
-            session.persist(newPlayerEntity);
+            session.merge(match);
             session.getTransaction().commit();
-
-            return newPlayerEntity;
         } catch (Exception e) {
             session.getTransaction().rollback();
-            throw new RuntimeException("Failed to create player: " + playerName, e);
+            throw new RuntimeException("Failed to create match: " + e);
+        } finally {
+            session.close();
         }
     }
 
@@ -86,7 +93,8 @@ public class PlayerDao {
 //
 //            Player player = session.get(Player.class, playerId);
 //            if (player != null) {
-////                player.setScore(newScore);
+
+    /// /                player.setScore(newScore);
 //                session.update(player); // Не обязательно, Hibernate сам отследит изменения
 //            }
 //
@@ -96,7 +104,6 @@ public class PlayerDao {
 //            throw new RuntimeException("Failed to update player score", e);
 //        }
 //    }
-
     public boolean deletePlayer(Long playerId) {
         Session session = sessionFactory.getCurrentSession();
 

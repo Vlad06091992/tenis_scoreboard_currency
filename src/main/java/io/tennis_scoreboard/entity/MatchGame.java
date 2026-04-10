@@ -1,4 +1,4 @@
-package io.microservices_java.entity;
+package io.tennis_scoreboard.entity;
 
 public class MatchGame extends MatchComponent {
     public MatchGame(String player1, String player2, int gameIndex, String gameName ) {

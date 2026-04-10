@@ -1,9 +1,9 @@
-package io.microservices_java.servlets;
+package io.tennis_scoreboard.servlets;
 
-import io.microservices_java.dao.MatchDao;
-import io.microservices_java.entity.MatchData;
-import io.microservices_java.entity.MatchViewData;
-import io.microservices_java.service.MatchOnGoingProcessor;
+import io.tennis_scoreboard.dao.MatchDao;
+import io.tennis_scoreboard.entity.MatchData;
+import io.tennis_scoreboard.entity.MatchViewData;
+import io.tennis_scoreboard.service.MatchOnGoingProcessor;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

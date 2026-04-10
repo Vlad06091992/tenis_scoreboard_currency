@@ -1,6 +1,6 @@
-package io.microservices_java.servlets;
+package io.tennis_scoreboard.servlets;
 
-import io.microservices_java.service.MatchOnGoingProcessor;
+import io.tennis_scoreboard.service.MatchOnGoingProcessor;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

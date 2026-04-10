@@ -1,4 +1,4 @@
-package io.microservices_java.dao;
+package io.tennis_scoreboard.dao;
 
 import jakarta.persistence.*;
 

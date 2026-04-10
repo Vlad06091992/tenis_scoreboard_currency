@@ -1,4 +1,4 @@
-package io.microservices_java.entity;
+package io.tennis_scoreboard.entity;
 
 public abstract class MatchComponent {
     String name;

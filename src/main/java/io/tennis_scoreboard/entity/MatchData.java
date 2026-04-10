@@ -1,4 +1,4 @@
-package io.microservices_java.entity;
+package io.tennis_scoreboard.entity;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -10,11 +10,6 @@ public class MatchData {
     public String getWinner() {
         return winner;
     }
-
-    public void setWinner(String winner) {
-        this.winner = winner;
-    }
-
     private String winner;
     private String player1 = "";
     private String player2 = "";
@@ -118,9 +113,6 @@ public class MatchData {
                 .secondPlayerName(currentMatchGame.player2)
                 .firstPlayerSetCount(getPlayerOneSetScore())
                 .secondPlayerSetCount(getPlayerTwoSetScore())
-
-
-
                 .playerOneGame(getPlayerOneGameScore())
                 .playerOnePoint(player1Points)
                 .playerSecondGame(getPlayerTwoGameScore())

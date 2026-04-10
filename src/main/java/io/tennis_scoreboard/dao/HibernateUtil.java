@@ -1,4 +1,4 @@
-package io.microservices_java.dao;
+package io.tennis_scoreboard.dao;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
