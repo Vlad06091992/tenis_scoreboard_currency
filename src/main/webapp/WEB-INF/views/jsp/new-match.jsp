@@ -18,6 +18,13 @@
     <script src="${pageContext.request.contextPath}/js/new-match.js" defer></script>
 </head>
 <body>
+<div class="header">
+    <div class="link-container">
+        <div>
+            <a class="link" href="${pageContext.request.contextPath}/results">Результаты</a>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <form action="new-match" method="POST">

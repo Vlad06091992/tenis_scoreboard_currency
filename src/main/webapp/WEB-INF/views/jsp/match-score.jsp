@@ -20,6 +20,16 @@
 </head>
 
 <body>
+<div class="header">
+    <div class="link-container">
+        <div>
+            <a class="link" href="${pageContext.request.contextPath}/new-match">Новый матч</a>
+        </div>
+        <div>
+            <a class="link" href="${pageContext.request.contextPath}/results">Результаты</a>
+        </div>
+    </div>
+</div>
 <div>
 <c:if test="${matchViewData.taiBreak}">
     <div class="match-finished">

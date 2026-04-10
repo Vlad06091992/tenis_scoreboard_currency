@@ -15,9 +15,10 @@
 </head>
 <body>
 <div class="header">
-    <div>
-        <a href="${pageContext.request.contextPath}/new-match">Новый матч</a>
-        <a href="${pageContext.request.contextPath}/results">Результаты</a>
+    <div class="link-container">
+        <div>
+            <a class="link" href="${pageContext.request.contextPath}/new-match">Новый матч</a>
+        </div>
     </div>
 </div>
 <div class="container">
