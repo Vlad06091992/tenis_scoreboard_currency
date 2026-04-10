@@ -22,7 +22,7 @@ public class ResultsServlet extends HttpServlet {
     MatchDao matchDao;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchOnGoingProcessor");
         matchDao = (MatchDao) getServletContext().getAttribute("matchDao");
     }

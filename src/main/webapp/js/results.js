@@ -16,7 +16,7 @@ window.onload = function () {
         if (e.target.value) {
             url.searchParams.set("name", e.target.value);
         } else {
-            url.searchParams.delete("name"); // удаляем параметр, если поле пустое
+            url.searchParams.delete("name");
         }
 
         window.history.replaceState({}, '', url);

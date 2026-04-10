@@ -12,10 +12,7 @@ import java.util.UUID;
 public class MatchOnGoingProcessor {
     Map<UUID, MatchData> matchDataMap = new HashMap<>();
 
-    public MatchOnGoingProcessor() {
-//        UUID key = UUID.fromString("d8c0de72-67e1-4370-8165-f1852febbf35");
-//        this.matchDataMap.put(key, new MatchData(key, "alesha", "serega"));
-    }
+    public MatchOnGoingProcessor() {}
 
     public Map<UUID, MatchData> getMatchDataMap() {
         return matchDataMap;

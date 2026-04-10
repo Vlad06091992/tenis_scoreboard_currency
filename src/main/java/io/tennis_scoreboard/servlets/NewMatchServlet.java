@@ -18,7 +18,7 @@ public class NewMatchServlet extends HttpServlet {
     MatchOnGoingProcessor matchOnGoingProcessor;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
          matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchOnGoingProcessor");
     }
 

@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const player2Input = document.querySelector('input[name="playerEntity2"]');
 
     [player1Input, player2Input].forEach(el => {
-        el.addEventListener("change", function() {  // function вместо стрелочной
-            this.classList.remove('player_input_invalid');  // this указывает на элемент
+        el.addEventListener("change", function() {
+            this.classList.remove('player_input_invalid');
         });
     });
 

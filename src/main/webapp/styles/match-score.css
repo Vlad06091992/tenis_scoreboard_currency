@@ -3,8 +3,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;  /* Добавить эту строку */
-    margin: 0;           /* И лучше сбросить margin */
+    min-height: 100vh;
+    margin: 0;
     padding: 0;
 }
 
@@ -19,10 +19,9 @@ body{
 }
 
 .grid-container {
-    background: #1a1f2e; /* Темный стальной */
+    background: #1a1f2e;
     padding: 20px;
     display: grid;
-    /* 3 строки 4 колонки*/
     grid-template: repeat(3, 1fr) / repeat(4, 200px);
 }
 
@@ -30,7 +29,7 @@ body{
     border: 3px solid #3a506b;
     margin: 5px;
     background: linear-gradient(135deg, #243b55 0%, #141e30 100%);
-    color: #e0eaff; /* Светлый голубоватый */
+    color: #e0eaff;
     border-radius: 8px;
     padding: 20px;
     font-size: 18px;
@@ -47,7 +46,7 @@ body{
 
 .cell:hover, .cell.active {
     background: linear-gradient(135deg, #3a506b 0%, #1c2b3a 100%);
-    border-color: #5bc0be; /* Акцентный бирюзовый */
+    border-color: #5bc0be;
     box-shadow: 0 0 15px rgba(91, 192, 190, 0.3);
     transform: translateY(-2px);
 }
@@ -61,14 +60,6 @@ body{
 .match-finished{
     color: white;
 }
-
-
-/* Ячейки счета текущего гейма */
-/*.cell.score-current {*/
-/*    background: linear-gradient(135deg, #5bc0be 0%, #3a8b89 100%);*/
-/*    color: #0a0e17;*/
-/*    border-color: #5bc0be;*/
-/*}*/
 
 .buttons_block{
     margin-top: 10px;
@@ -103,10 +94,8 @@ button:disabled {
 .link-container {
     margin-left: auto;
     margin-right: 20px;
-    /*margin: 10px 0;*/
-    /*height: 10px;        !* если реально нужно 10px — оставляйте, но тогда контент будет сжат *!*/
     display: flex;
-    align-items: center; /* вертикальное центрирование внутри flex-контейнера */
+    align-items: center;
     gap: 10px;
 }
 

@@ -22,16 +22,13 @@ public class MatchScoreServlet extends HttpServlet {
     MatchDao matchDao;
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         matchOnGoingProcessor = (MatchOnGoingProcessor) getServletContext().getAttribute("matchOnGoingProcessor");
         matchDao = (MatchDao) getServletContext().getAttribute("matchDao");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
         String matchId = request.getPathInfo().substring(1);
-
-        //берем матч, матч должен с помощью хелпера корректно в себе инкаспулировать логику игры
         MatchData matchData = matchOnGoingProcessor.getMatchData(UUID.fromString(matchId));
         MatchViewData matchViewData = matchData.getMatchViewData();
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/views/jsp/match-score.jsp");
@@ -68,7 +65,4 @@ public class MatchScoreServlet extends HttpServlet {
         }
             response.sendRedirect(request.getContextPath() + "/match-score" + '/' + matchId);
     }
-
-
-
 }
