@@ -1,15 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.querySelector(".submit_button");
+    const player1Input = document.querySelector('input[name="playerEntity1"]');
+    const player2Input = document.querySelector('input[name="playerEntity2"]');
+
+    [player1Input, player2Input].forEach(el => {
+        el.addEventListener("change", function() {  // function вместо стрелочной
+            this.classList.remove('player_input_invalid');  // this указывает на элемент
+        });
+    });
 
     submitButton.addEventListener("click", function(e) {
-        // Проверка полей ввода
-        const player1Input = document.querySelector('input[name="player1"]');
-        const player2Input = document.querySelector('input[name="player2"]');
 
-        if (!player1Input.value.trim() || !player2Input.value.trim()) {
+        const errors = []
+        const firstPlayerName = player1Input.value.trim().length;
+        const secondPlayerName = player2Input.value.trim().length;
 
-            player1Input.classList.add('player_input_invalid')
+        if (!firstPlayerName) {
+            errors.push(player1Input)
+        }
 
+        if (!secondPlayerName) {
+            errors.push(player2Input)
+        }
+
+        if(errors.length){
+            errors.forEach(el=>el.classList.add('player_input_invalid'))
             alert('Пожалуйста, введите имена обоих игроков!');
             e.preventDefault();
         }
