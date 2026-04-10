@@ -28,7 +28,7 @@ public class ResultsServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String name = URLEncoder.encode(request.getParameter("name") != null ? request.getParameter("name") : "", StandardCharsets.UTF_8);
+        String name = request.getParameter("name") != null ? request.getParameter("name") : "";
         String page = request.getParameter("page");
         if (name == null) name = "";
         String number = page == null ? "1" : page;
