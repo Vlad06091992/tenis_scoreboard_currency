@@ -3,6 +3,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;  /* Добавить эту строку */
+    margin: 0;           /* И лучше сбросить margin */
+    padding: 0;
 }
 
 .header{
@@ -23,7 +26,7 @@ body{
     grid-template: repeat(3, 1fr) / repeat(4, 200px);
 }
 
-.cell {
+.cell, .info {
     border: 3px solid #3a506b;
     margin: 5px;
     background: linear-gradient(135deg, #243b55 0%, #141e30 100%);
@@ -36,6 +39,10 @@ body{
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+}
+
+.info{
+    margin: 15px;
 }
 
 .cell:hover, .cell.active {

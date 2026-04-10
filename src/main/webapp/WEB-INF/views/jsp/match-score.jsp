@@ -31,56 +31,37 @@
     </div>
 </div>
 <div>
-<c:if test="${matchViewData.taiBreak}">
-    <div class="match-finished">
-        Тай брейк!
-    </div>
-</c:if>
-<c:if test="${matchViewData.finished}">
-    <div class="match-finished">
-        Игра закончена!
-    </div>
-</c:if>
-
-<c:if test="${matchViewData.winner}">
-    <div class="match-finished">
-        Победитель!
-        <div class="cell">${matchViewData.winner}</div>
-    </div>
-</c:if>
-
-<div class="grid-container">
-
-    <div class="cell cell_header">Player</div>
-    <div class="cell cell_header">Sets</div>
-    <div class="cell cell_header">Games</div>
-    <div class="cell cell_header">Points</div>
-
-    <div class="cell">${matchViewData.playerOneName}</div>
-    <div class="cell">${matchViewData.playerOneSet}</div>
-    <div class="cell">${matchViewData.playerOneGame}</div>
-    <div class="cell">${matchViewData.playerOnePoint}</div>
-
-    <div class="cell">${matchViewData.playerTwoName}</div>
-    <div class="cell">${matchViewData.playerSecondSet}</div>
-    <div class="cell">${matchViewData.playerSecondGame}</div>
-    <div class="cell">${matchViewData.playerSecondPoint}</div>
-</div>
-
-<c:choose>
-    <c:when test="${matchViewData.finished == true}">
-        <div class="buttons_container">
-            <button disabled class="playerButton" data-player="playerOne" type="button">Player 1 win</button>
-            <button disabled class="playerButton" data-player="playerTwo" type="button">Player 2 win</button>
+    <c:if test="${matchViewData.taiBreak}">
+        <div class="info">
+            Тай брейк!
         </div>
-    </c:when>
-    <c:otherwise>
-        <div class="buttons_container">
-            <button class="playerButton" data-player="playerOne" type="button">Player 1 win</button>
-            <button class="playerButton" data-player="playerTwo" type="button">Player 2 win</button>
-        </div>
-    </c:otherwise>
-</c:choose>
+    </c:if>
+    <c:if test="${matchViewData.finished}">
+        <div class="info">Игра закончена! Победитель: ${matchViewData.winner}</div>
+    </c:if>
+
+    <div class="grid-container">
+
+        <div class="cell cell_header">Player</div>
+        <div class="cell cell_header">Sets</div>
+        <div class="cell cell_header">Games</div>
+        <div class="cell cell_header">Points</div>
+
+        <div class="cell">${matchViewData.playerOneName}</div>
+        <div class="cell">${matchViewData.playerOneSet}</div>
+        <div class="cell">${matchViewData.playerOneGame}</div>
+        <div class="cell">${matchViewData.playerOnePoint}</div>
+
+        <div class="cell">${matchViewData.playerTwoName}</div>
+        <div class="cell">${matchViewData.playerSecondSet}</div>
+        <div class="cell">${matchViewData.playerSecondGame}</div>
+        <div class="cell">${matchViewData.playerSecondPoint}</div>
+    </div>
+
+    <div class="buttons_container" data-finished="${matchViewData.finished}" class="buttons_container">
+        <button disabled class="playerButton" data-player="playerOne" type="button">Player 1 win</button>
+        <button disabled class="playerButton" data-player="playerTwo" type="button">Player 2 win</button>
+    </div>
 </div>
 </body>
 </html>
