@@ -1,9 +1,9 @@
-package io.microservices_java.service;
+package io.tennis_scoreboard.service;
 
-import io.microservices_java.entity.MatchGame;
-import io.microservices_java.entity.MatchData;
-import io.microservices_java.entity.MatchSet;
-import io.microservices_java.entity.MatchTieBreak;
+import io.tennis_scoreboard.entity.MatchGame;
+import io.tennis_scoreboard.entity.MatchData;
+import io.tennis_scoreboard.entity.MatchSet;
+import io.tennis_scoreboard.entity.MatchTieBreak;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,10 +13,13 @@ public class MatchOnGoingProcessor {
     Map<UUID, MatchData> matchDataMap = new HashMap<>();
 
     public MatchOnGoingProcessor() {
-        UUID key = UUID.fromString("d8c0de72-67e1-4370-8165-f1852febbf35");
-        this.matchDataMap.put(key, new MatchData(key, "alesha", "serega"));
+//        UUID key = UUID.fromString("d8c0de72-67e1-4370-8165-f1852febbf35");
+//        this.matchDataMap.put(key, new MatchData(key, "alesha", "serega"));
     }
 
+    public Map<UUID, MatchData> getMatchDataMap() {
+        return matchDataMap;
+    }
 
     public MatchData getMatchData(UUID uuid) {
         return matchDataMap.get(uuid);
@@ -26,8 +29,16 @@ public class MatchOnGoingProcessor {
         this.matchDataMap.put(uuid, new MatchData(uuid, playerOneName, playerTwoName));
     }
 
-    private void updateScoreInGame(MatchData matchData) {
+    private void updateScoreInGame(MatchData matchData, String player) {
         MatchGame currentGame = matchData.getCurrentGame();
+
+        if (player.equals("playerOne")) {
+            currentGame.setPlayer1Points(currentGame.getPlayer1Points() + 1);
+        }
+        if (player.equals("playerTwo")) {
+            currentGame.setPlayer2Points(currentGame.getPlayer2Points() + 1);
+        }
+
         MatchSet currentSet = matchData.getCurrentSet();
         String winner;
         Integer one = currentGame.getPlayer1Points();
@@ -39,10 +50,9 @@ public class MatchOnGoingProcessor {
         int max = Math.max(one, two);
         int spread = Math.abs(one - two);
 
-        boolean b = isTaiBreak ?  (max >= 7 && spread > 1): (max >= 4 && spread > 1) ;
 
         //в рамках сета стартуем новую игру
-        if (b) {
+        if (isTaiBreak ?  (max >= 7 && spread > 1): (max >= 4 && spread > 1) ) {
             if (max == one) {
                 winner = matchData.getPlayer1();
                 currentSet.setPlayer1Points(currentSet.getPlayer1Points() + 1);
@@ -98,7 +108,7 @@ public class MatchOnGoingProcessor {
         }
     }
 
-    public void updateMatchStatus(MatchData matchData){
+    private void updateMatchStatus(MatchData matchData){
         int frst = matchData.getPlayerOneSetScore();
         int second = matchData.getPlayerTwoSetScore();
 
@@ -115,21 +125,10 @@ public class MatchOnGoingProcessor {
 
     }
 
-    public void updateScore(MatchData matchData, String player) {
-        MatchGame currentMatchGame = matchData.getCurrentGame();
-
-        if (player.equals("playerOne")) {
-            currentMatchGame.setPlayer1Points(currentMatchGame.getPlayer1Points() + 1);
-        }
-        if (player.equals("playerTwo")) {
-            currentMatchGame.setPlayer2Points(currentMatchGame.getPlayer2Points() + 1);
-        }
-    }
 
     public void updateMatchProgress(UUID matchId, String player) {
         MatchData matchData = this.matchDataMap.get(matchId);
-        updateScore(matchData, player);
-        updateScoreInGame(matchData);
+        updateScoreInGame(matchData, player);
         updateGamesInSet(matchData);
         updateMatchStatus(matchData);
 
