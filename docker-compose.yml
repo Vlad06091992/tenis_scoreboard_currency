@@ -16,6 +16,9 @@ services:
 
 
   tennis_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: tennis_scoreboard:latest
     container_name: tennis_container
     ports:
