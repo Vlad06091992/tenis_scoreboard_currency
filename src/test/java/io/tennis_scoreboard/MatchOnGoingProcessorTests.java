@@ -6,14 +6,11 @@ import io.tennis_scoreboard.entity.MatchTieBreak;
 import io.tennis_scoreboard.service.MatchOnGoingProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
 class MatchOnGoingProcessorTests {
     static class TestUtils {
         static public void updateMatchProgressTestMethod(
