@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13.3
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: java_user
+      POSTGRES_PASSWORD: java_password
+      POSTGRES_DB: tennis_scoreboard
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - tennis-network
+
+
+  tennis_app:
+    image: tennis_scoreboard:latest
+    container_name: tennis_container
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/tennis_scoreboard
+      DB_USER: java_user
+      DB_PASSWORD: java_password
+      DB_SHOW_SQL: "true"
+      DB_DDL_AUTO: update
+    depends_on:
+      - postgres
+    networks:
+      - tennis-network
+
+networks:
+  tennis-network:
+    driver: bridge
+volumes:
+  postgres_data:
