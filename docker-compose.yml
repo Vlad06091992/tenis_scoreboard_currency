@@ -4,11 +4,11 @@ services:
     image: postgres:13.3
     container_name: postgres_container
     environment:
-      POSTGRES_USER: java_user
-      POSTGRES_PASSWORD: java_password
-      POSTGRES_DB: tennis_scoreboard
+     POSTGRES_USER: ${POSTGRES_USER}
+     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+     POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -19,13 +19,13 @@ services:
     image: tennis_scoreboard:latest
     container_name: tennis_container
     ports:
-      - "8080:8080"
+      - "${APP_PORT}:8080"
     environment:
-      DB_URL: jdbc:postgresql://postgres:5432/tennis_scoreboard
-      DB_USER: java_user
-      DB_PASSWORD: java_password
-      DB_SHOW_SQL: "true"
-      DB_DDL_AUTO: update
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_SHOW_SQL: ${DB_SHOW_SQL}
+      DB_DDL_AUTO: ${DB_DDL_AUTO}
     depends_on:
       - postgres
     networks:
